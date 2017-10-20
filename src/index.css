@@ -1,0 +1,6 @@
+
+html, body, :global(#root) {
+  height: 100%;
+  // font-family:"Times New Roman",Georgia,Serif;
+}
+
