@@ -1,6 +1,6 @@
-import * as usersService from '../services/users';
 import querystring from 'querystring';
-import pathToRegexp from 'path-to-regexp';
+// import pathToRegexp from 'path-to-regexp';
+import * as usersService from '../services/users';
 
 export default {
   namespace: 'users',
@@ -15,15 +15,15 @@ export default {
     },
   },
   effects: {
-    *fetch({ payload: { page=1 } }, { call, put }) {
+    *fetch({ payload: { page = 1 } }, { call, put }) {
       const { data, headers } = yield call(usersService.fetch, parseInt(page));
-      yield put({ 
-        type: 'save', 
-        payload: { 
-          data, 
-          total: parseInt(headers['x-total-count'], 10) ,
-          page: parseInt(page, 10) 
-        } 
+      yield put({
+        type: 'save',
+        payload: {
+          data,
+          total: parseInt(headers['x-total-count'], 10),
+          page: parseInt(page, 10),
+        },
       });
     },
     *remove({ payload: id }, { call, put, select }) {
@@ -37,13 +37,12 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen((a) => {
-        const query = querystring.parse(a.search.substring(1))
-
-        const match = pathToRegexp('/users/:id').exec(a.pathname)
-        if (match) {
-          const userId = match[1]
-        }
-        if (a.pathname.indexOf('/users') !== -1 ) {
+        const query = querystring.parse(a.search.substring(1));
+        // const match = pathToRegexp('/users/:id').exec(a.pathname);
+        // if (match) {
+        //   const userId = match[1];
+        // }
+        if (a.pathname.indexOf('/users') !== -1) {
           dispatch({ type: 'fetch', payload: query });
         }
       });

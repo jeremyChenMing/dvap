@@ -5,7 +5,6 @@ import l from './IndexPage.less';
 import MainLayout from '../components/MainLayout/MainLayout';
 
 function IndexPage({ location }) {
-  console.log(arguments)
   return (
     <MainLayout location={location}>
       <div className={styles.normal}>

@@ -2,20 +2,16 @@ import React from 'react';
 import { connect } from 'dva';
 import { Table, Pagination, Popconfirm } from 'antd';
 import styles from './Users.css';
-import { routerRedux } from 'dva/router';
+// import { routerRedux } from 'dva/router';
 import { PAGE_SIZE } from '../constants';
 
 function Users({ list: dataSource, dispatch, loading, total, page: current }) {
   function deleteHandler(id) {
-    console.warn(`TODO: ${id}`);
-    dispatch({
-	  type: 'users/remove',
-	  payload: id,
-	});
+    dispatch({ type: 'users/remove', payload: id });
   }
   function pageChangeHandler(page) {
-  	console.log(page)
-    document.location.href = `#/users?page=${page}`
+  	console.log(page);
+    document.location.href = `#/users?page=${page}`;
   }
   const columns = [
     {
@@ -75,7 +71,7 @@ function mapStateToProps(state) {
     list,
     total,
     page,
-    loading
+    loading,
   };
 }
 
