@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "start": "roadhog server",
+    "start": "PORT=7000 roadhog server",
     "build": "roadhog build",
-    "lint": "eslint --fix --ext .js src",
+    "lint": "eslint --fix --cache --ext .js src",
     "precommits": "npm run lint"
   },
   "engines": {
