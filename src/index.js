@@ -6,12 +6,12 @@ import * as obj from 'dva/router';
 import createHistory from 'history/createBrowserHistory';
 import './index.css';
 
-const historys = createHistory();
-console.log(historys, obj);
+// const historys = createHistory();
+// console.log(historys, obj);
 
 // 1. Initialize
 const app = dva({
-  history: historys,
+  // history: historys,
   extraReducers: {
     form: formReducer,
   },

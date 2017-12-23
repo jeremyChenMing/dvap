@@ -48,3 +48,21 @@ export default async function request(url, options) {
 //     .then(data => ({ data }))
 //     .catch(err => ({ err }));
 // }
+
+
+
+// 另外一种处理错误的方法  同后台约定 返回的错误如下
+// {
+//   status: 'error',
+//   message: '',
+// }
+
+function parseErrorMessage({ data }) {
+  const { status, message } = data;
+  if (status === 'error') {
+    throw new Error(message); //这个是统一走到onError里
+  }
+  return { data };
+}
+
+

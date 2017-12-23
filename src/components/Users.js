@@ -11,7 +11,10 @@ function Users({ list: dataSource, dispatch, loading, total, page: current }) {
   }
   function pageChangeHandler(page) {
   	console.log(page);
-    document.location.href = `#/users?page=${page}`;
+    // document.location.href = `#/users?page=${page}`;
+    return new Promise( (resolve, reject) => {
+      reject({message:'123'})
+    })
   }
   const columns = [
     {
