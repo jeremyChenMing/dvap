@@ -18,6 +18,9 @@ function Header({ location }) {
       <Menu.Item key="/name">
         <Link to="/name"><Icon type="user" />Name</Link>
       </Menu.Item>
+      <Menu.Item key="/test">
+        <Link to="/test"><Icon type="user" />test</Link>
+      </Menu.Item>
     </Menu>
   );
 }

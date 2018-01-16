@@ -4,9 +4,15 @@ import { Router, Route, Switch } from 'dva/router';
 // import IndexPage from './routes/IndexPage';
 // import Users from './routes/Users.js';
 // import Name from './routes/Name.js';
+import Dnd from './routes/Dnd.js';
 
 
 import dynamic from 'dva/dynamic';
+
+
+
+
+
 
 function RouterConfig({ history, app }) {
   
@@ -33,6 +39,7 @@ function RouterConfig({ history, app }) {
         <Route path="/" exact component={IndexPage} />
         <Route path="/users" component={Users} />
         <Route path="/name" component={Name} />
+        <Route path="/test" component={Dnd} />
       </Switch>
     </Router>
   );

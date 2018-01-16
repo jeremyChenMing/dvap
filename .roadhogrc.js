@@ -26,7 +26,7 @@ module.exports = {
   },
   "theme": {
       "@primary-color": "#F4682A",
-      "@font-size-base": "16px",
-      "@link-color": "#419EE7"
+      "@font-size-base": "14px",
+      "@link-color": "#419EE7",
   }
 }

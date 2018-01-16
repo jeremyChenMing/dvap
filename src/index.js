@@ -4,7 +4,8 @@ import { message } from 'antd';
 import { reducer as formReducer } from 'redux-form';
 import * as obj from 'dva/router';
 import createHistory from 'history/createBrowserHistory';
-import './index.css';
+import 'antd/dist/antd.less'
+import './less/index.less';
 
 // const historys = createHistory();
 // console.log(historys, obj);
