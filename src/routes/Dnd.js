@@ -26,6 +26,7 @@ class Dnd extends React.Component {
     const { location } = this.props
     const { a } = this.state
     console.log('render App!')
+    // 测试分支的推送情况
     return (
       <MainLayout location={location}>
         <div className='myself'>
