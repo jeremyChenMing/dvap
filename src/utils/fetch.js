@@ -30,16 +30,16 @@ const checkStatus = (response) => {
 }
 
 const parseJSON = (response) => {
-  return response.json().then(json => {
+  return response.json().then((json) => {
     // if (json.code === 401) {
     //   window.location.href = '/#/login'
     // }
     return json
-  }).catch(err => {
+  }).catch((err) => {
     console.log(err)
     return Promise.reject({ // eslint-disable-line
       code: -1,
-      msg: err + ''
+      msg: `${err}`
     })
   })
 }
@@ -47,7 +47,7 @@ const parseJSON = (response) => {
 const completeHeader = (header) => {
   const state = (rootState || {}).user || {}
 
-  const {token} = state
+  const { token } = state
 
   const result = {
     ...header,
@@ -71,7 +71,7 @@ export const get = (url, query = {}, options = {}) => {
   const defaultOpt = {
     method: 'GET',
     timeout: requestTimeOut,
-    headers: {...options}
+    headers: { ...options }
   }
 
   defaultOpt.headers = completeHeader(defaultOpt.headers)
@@ -84,7 +84,7 @@ export const post = (url, query = {}, data = {}, options = {}) => {
     method: 'POST',
     timeout: requestTimeOut,
     body: JSON.stringify(data),
-    headers: {...options}
+    headers: { ...options }
   }
 
   defaultOpt.headers = completeHeader(defaultOpt.headers)
@@ -97,7 +97,7 @@ export const put = (url, query = {}, data = {}, options = {}) => {
     method: 'PUT',
     timeout: requestTimeOut,
     body: JSON.stringify(data),
-    headers: {...options}
+    headers: { ...options }
   }
 
   defaultOpt.headers = completeHeader(defaultOpt.headers)
@@ -108,7 +108,7 @@ export const put = (url, query = {}, data = {}, options = {}) => {
 export const del = (url, query = {}, data = {}, options = {}) => {
   const defaultOpt = {
     method: 'DELETE',
-    headers: {...options},
+    headers: { ...options },
     timeout: requestTimeOut,
     body: JSON.stringify(data)
   }
@@ -123,7 +123,7 @@ export const patch = (url, query = {}, data = {}, options = {}) => {
     method: 'PATCH',
     timeout: requestTimeOut,
     body: JSON.stringify(data),
-    headers: {...options}
+    headers: { ...options }
   }
 
   defaultOpt.headers = completeHeader(defaultOpt.headers)
@@ -134,7 +134,7 @@ export const patch = (url, query = {}, data = {}, options = {}) => {
 export const postFormData = (url, query = {}, data = {}, options = {}) => {
   const formData = new window.FormData()
 
-  for (let i in data) {
+  for (const i in data) {
     formData.append(i, data[i])
   }
 
@@ -142,7 +142,7 @@ export const postFormData = (url, query = {}, data = {}, options = {}) => {
     method: 'POST',
     timeout: requestTimeOut,
     body: formData,
-    headers: {...options}
+    headers: { ...options }
   }
 
   defaultOpt.headers = completeHeader(defaultOpt.headers)
@@ -155,7 +155,7 @@ export const postFormData = (url, query = {}, data = {}, options = {}) => {
 export const putFormData = (url, query = {}, data = {}, options = {}) => {
   const formData = new window.FormData()
 
-  for (let i in data) {
+  for (const i in data) {
     formData.append(i, data[i])
   }
 
@@ -163,7 +163,7 @@ export const putFormData = (url, query = {}, data = {}, options = {}) => {
     method: 'PUT',
     timeout: requestTimeOut,
     body: formData,
-    headers: {...options}
+    headers: { ...options }
   }
 
   defaultOpt.headers = completeHeader(defaultOpt.headers)
@@ -176,7 +176,7 @@ export const putFormData = (url, query = {}, data = {}, options = {}) => {
 export const patchFormData = (url, query = {}, data = {}, options = {}) => {
   const formData = new window.FormData()
 
-  for (let i in data) {
+  for (const i in data) {
     formData.append(i, data[i])
   }
 
@@ -184,7 +184,7 @@ export const patchFormData = (url, query = {}, data = {}, options = {}) => {
     method: 'PATCH',
     timeout: requestTimeOut,
     body: formData,
-    headers: {...options}
+    headers: { ...options }
   }
 
   defaultOpt.headers = completeHeader(defaultOpt.headers)

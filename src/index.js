@@ -1,11 +1,10 @@
-import dva from 'dva';
-import createLoading from 'dva-loading';
-import { message } from 'antd';
-import { reducer as formReducer } from 'redux-form';
-import * as obj from 'dva/router';
-import createHistory from 'history/createBrowserHistory';
+import dva from 'dva'
+import createLoading from 'dva-loading'
+import { message } from 'antd'
+import { reducer as formReducer } from 'redux-form'
+// import createHistory from 'history/createBrowserHistory'
 import 'antd/dist/antd.less'
-import './less/index.less';
+import './less/index.less'
 
 // const historys = createHistory();
 // console.log(historys, obj);
@@ -14,15 +13,15 @@ import './less/index.less';
 const app = dva({
   // history: historys,
   extraReducers: {
-    form: formReducer,
+    form: formReducer
   },
   onError: (e) => {
-  	message.error(`错误：${e.message}`, 3);
-  },
-});
+    message.error(`错误：${e.message}`, 3)
+  }
+})
 
 // const app = dva();
-app.use(createLoading());
+app.use(createLoading())
 // 2. Plugins
 // app.use({});
 
@@ -31,7 +30,7 @@ app.use(createLoading());
 // app.model(require('./models/user'));
 //  上述在 陆游中实现了动态的加载
 // 4. Router
-app.router(require('./router'));
+app.router(require('./router'))
 
 // 5. Start
-app.start('#root');
+app.start('#root')

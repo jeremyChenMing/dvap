@@ -1,21 +1,15 @@
-import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
+import React from 'react'
+import { Router, Route, Switch } from 'dva/router'
 
 // import IndexPage from './routes/IndexPage';
 // import Users from './routes/Users.js';
 // import Name from './routes/Name.js';
-import Dnd from './routes/Dnd.js';
+import Dnd from './routes/Dnd.js'
+import Lay from './routes/Lay.js'
 
+import dynamic from 'dva/dynamic'
 
-import dynamic from 'dva/dynamic';
-
-
-
-
-
-
-function RouterConfig({ history, app }) {
-  
+function RouterConfig ({ history, app }) {
   const IndexPage = dynamic({
     app,
     models: () => [import('./models/example')],
@@ -36,13 +30,14 @@ function RouterConfig({ history, app }) {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={IndexPage} />
-        <Route path="/users" component={Users} />
-        <Route path="/name" component={Name} />
-        <Route path="/test" component={Dnd} />
+        <Route path='/' exact component={IndexPage} />
+        <Route path='/users' component={Users} />
+        <Route path='/name' component={Name} />
+        <Route path='/test' component={Dnd} />
+        <Route path='/lay' component={Lay} />
       </Switch>
     </Router>
-  );
+  )
 }
 
-export default RouterConfig;
+export default RouterConfig

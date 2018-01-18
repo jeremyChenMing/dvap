@@ -1,17 +1,17 @@
-import fetch from 'dva/fetch';
+import fetch from 'dva/fetch'
 
 // function parseJSON(response) {
 //   return response.json();
 // }
 
-function checkStatus(response) {
+function checkStatus (response) {
   if (response.status >= 200 && response.status < 300) {
-    return response;
+    return response
   }
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  const error = new Error(response.statusText)
+  error.response = response
+  throw error
 }
 
 /**
@@ -22,23 +22,23 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 
-export default async function request(url, options) {
-  const response = await fetch(url, options);
+export default async function request (url, options) {
+  const response = await fetch(url, options)
 
-  checkStatus(response);
+  checkStatus(response)
 
-  const data = await response.json();
+  const data = await response.json()
 
   const ret = {
     data,
-    headers: {},
-  };
-
-  if (response.headers.get('x-total-count')) {
-    ret.headers['x-total-count'] = response.headers.get('x-total-count');
+    headers: {}
   }
 
-  return ret;
+  if (response.headers.get('x-total-count')) {
+    ret.headers['x-total-count'] = response.headers.get('x-total-count')
+  }
+
+  return ret
 }
 
 // export default function request(url, options) {
@@ -49,20 +49,16 @@ export default async function request(url, options) {
 //     .catch(err => ({ err }));
 // }
 
-
-
 // 另外一种处理错误的方法  同后台约定 返回的错误如下
 // {
 //   status: 'error',
 //   message: '',
 // }
 
-function parseErrorMessage({ data }) {
-  const { status, message } = data;
-  if (status === 'error') {
-    throw new Error(message); //这个是统一走到onError里
-  }
-  return { data };
-}
-
-
+// function parseErrorMessage ({ data }) {
+//   const { status, message } = data
+//   if (status === 'error') {
+//     throw new Error(message) // 这个是统一走到onError里
+//   }
+//   return { data }
+// }

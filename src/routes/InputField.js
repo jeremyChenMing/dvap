@@ -13,11 +13,12 @@ import {
 
 import { Field } from 'redux-form'
 import moment from 'moment'
+
 const FormItem = Form.Item
 const Option = Select.Option
 const CheckboxGroup = Checkbox.Group
 const RadioGroup = Radio.Group
-const {MonthPicker} = DatePicker
+const { MonthPicker } = DatePicker
 
 class InputField extends React.Component {
   constructor (props) {
@@ -58,8 +59,8 @@ class InputField extends React.Component {
   }
   static defaultProps = {
     formItemLayout: {
-      labelCol: {span: 6},
-      wrapperCol: {span: 14}
+      labelCol: { span: 6 },
+      wrapperCol: { span: 14 }
     },
     placeholder: '',
     type: 'text',
@@ -105,7 +106,7 @@ class InputField extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const {options, optDis} = nextProps
+    const { options, optDis } = nextProps
     if (options && options.length !== this.props.options.length) {
       this.setState({
         needReload: true
@@ -118,14 +119,15 @@ class InputField extends React.Component {
   }
 
   renderField (field) {
-    let {formItemLayout, label, format, rows, id, formatDate, placeholder, type, onKeyUp, inputStyle, size, options, multiple, disabled, defaultValue, optionKey, optionValue, showSearch, optionFilterProp, has, min, disabledDate, optDis, sup, onPressEnter, plusData, checkTxt} = this.props
+    const { formItemLayout, label, format, rows, id, formatDate, placeholder, type, onKeyUp, inputStyle, size, options, multiple, disabled, defaultValue, optionKey, optionValue, showSearch, optionFilterProp, has, min, disabledDate, optDis, sup, onPressEnter, plusData, checkTxt } = this.props
     if (type && type === 'select') {
       return (
         <FormItem
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <Select
             multiple={multiple}
             value={field.input.value ? field.input.value : undefined}
@@ -145,11 +147,14 @@ class InputField extends React.Component {
             style={inputStyle}
             showSearch={showSearch}
             optionFilterProp={optionFilterProp}
-            {...plusData}>
+            {...plusData}
+          >
             {options.map((option, i) => {
               return (
-                <Option key={i} disabled={option[optionKey] === optDis}
-                  value={option[optionKey]}>{option[optionValue]}</Option>
+                <Option
+                  key={i} disabled={option[optionKey] === optDis}
+                  value={option[optionKey]}
+                >{option[optionValue]}</Option>
               )
             })}
           </Select>
@@ -163,12 +168,13 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <RadioGroup
             // defaultValue={defaultValue}
             {...field.input}
-            onChange={(value) => { field.input.onChange(value.target.value)}}
-            >
+            onChange={(value) => { field.input.onChange(value.target.value) }}
+          >
             {options.map((option, i) => {
               return (
                 <Radio key={i} value={option.key} style={inputStyle}>{option.name}</Radio>
@@ -183,7 +189,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <Cascader
             onChange={(value) => {
               if (value && value.length < 1) {
@@ -206,7 +213,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <TimePicker
             onChange={(time) => {
               const value = time.format(format)
@@ -217,7 +225,8 @@ class InputField extends React.Component {
             size={size}
             style={inputStyle}
             format={format}
-            {...plusData} />
+            {...plusData}
+          />
         </FormItem>
       )
     } else if (type && type === 'date') {
@@ -226,7 +235,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <DatePicker
             onChange={(time, timeString) => {
               const value = time.format(formatDate)
@@ -238,7 +248,8 @@ class InputField extends React.Component {
             placeholder={placeholder}
             size={size}
             style={inputStyle}
-            {...plusData} />
+            {...plusData}
+          />
         </FormItem>
       )
     } else if (type && type === 'month') {
@@ -247,7 +258,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <MonthPicker
             onChange={(time, timeString) => {
               const value = time.format(formatDate)
@@ -257,20 +269,24 @@ class InputField extends React.Component {
             placeholder={placeholder}
             size={size}
             style={inputStyle}
-            {...plusData} />
+            {...plusData}
+          />
         </FormItem>
       )
     } else if (type && type === 'checkboxGroup') {
       return (
-        <FormItem className='formItems'
+        <FormItem
+          className='formItems'
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <CheckboxGroup
             onChange={field.input.onChange}
             options={options}
-            value={field.input.value ? field.input.value : null} />
+            value={field.input.value ? field.input.value : null}
+          />
         </FormItem>
       )
     } else if (type && type === 'textarea') {
@@ -280,7 +296,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <Input
             onChange={field.input.onChange} type='textarea'
             value={field.input.value ? field.input.value : undefined}
@@ -288,7 +305,8 @@ class InputField extends React.Component {
             id={id}
             rows={rows}
             style={inputStyle}
-            {...plusData} />
+            {...plusData}
+          />
         </FormItem>
       )
     } else if (type && type === 'hidden') {
@@ -297,7 +315,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)} style={{'display': 'none'}}>
+          help={this.showErrMessage(field)} style={{ display: 'none' }}
+        >
           <Input
             {...field.input}
             placeholder={placeholder}
@@ -305,7 +324,8 @@ class InputField extends React.Component {
             onKeyUp={onKeyUp}
             style={inputStyle}
             size={size}
-            {...plusData} />
+            {...plusData}
+          />
         </FormItem>
       )
     } else if (type && type === 'number') {
@@ -315,7 +335,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <InputNumber
             disabled={disabled}
             placeholder={placeholder}
@@ -331,7 +352,8 @@ class InputField extends React.Component {
                 field.input.onChange(value)
               }
             }}
-            {...plusData} /> { sup ? <span>m<sup>2</sup></span> : null}
+            {...plusData}
+          /> { sup ? <span>m<sup>2</sup></span> : null}
         </FormItem>
       )
     } else if (type && type === 'disnum') {
@@ -340,7 +362,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <Input
             {...field.input}
             value={field.input.value ? field.input.value : defaultValue}
@@ -357,7 +380,8 @@ class InputField extends React.Component {
             placeholder={placeholder}
             style={inputStyle}
             size={size}
-            {...plusData} />
+            {...plusData}
+          />
         </FormItem>
       )
     } else if (type && type === 'files') {
@@ -367,67 +391,76 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
-          <ul style={{display: 'table-cell'}}>
+          help={this.showErrMessage(field)}
+        >
+          <ul style={{ display: 'table-cell' }}>
             {
               [''].map((item, index) => {
                 return (
-                  <li key={index} style={{
-                    width: 50,
-                    height: 50,
-                    verticalAlign: 'top',
-                    display: 'inline-block',
-                    border: '1px solid #eaeaea',
-                    lineHeight: '50px',
-                    marginRight: '15px',
-                    textAlign: 'center',
-                    borderRadius: '5px',
-                    cursor: 'pointer'
-                  }}>
-                    <span className='upvi-icon' style={{color: '#05419D', fontSize: '20px'}}>&#xe6a4;</span>
+                  <li
+                    key={index} style={{
+                      width: 50,
+                      height: 50,
+                      verticalAlign: 'top',
+                      display: 'inline-block',
+                      border: '1px solid #eaeaea',
+                      lineHeight: '50px',
+                      marginRight: '15px',
+                      textAlign: 'center',
+                      borderRadius: '5px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <span className='upvi-icon' style={{ color: '#05419D', fontSize: '20px' }}>&#xe6a4;</span>
                   </li>
                 )
               })
             }
-            <li style={{
-              width: 50,
-              height: 50,
-              verticalAlign: 'top',
-              display: 'inline-block',
-              border: '1px solid #eaeaea',
-              lineHeight: '50px',
-              marginRight: '15px',
-              textAlign: 'center',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}>
-              <span className='upvi-icon' style={{color: '#05419D', fontSize: '20px'}}>&#xe699;</span>
+            <li
+              style={{
+                width: 50,
+                height: 50,
+                verticalAlign: 'top',
+                display: 'inline-block',
+                border: '1px solid #eaeaea',
+                lineHeight: '50px',
+                marginRight: '15px',
+                textAlign: 'center',
+                borderRadius: '5px',
+                cursor: 'pointer'
+              }}
+            >
+              <span className='upvi-icon' style={{ color: '#05419D', fontSize: '20px' }}>&#xe699;</span>
             </li>
-            <li style={{
-              width: 60,
-              height: 50,
-              verticalAlign: 'top',
-              textAlign: 'center',
-              display: 'inline-block',
-              border: '1px solid transparent',
-              paddingTop: '12px'
-            }}>
-              <p style={{fontSize: '12px', color: '#9b9b9b'}}>支持格式</p>
-              <p style={{fontSize: '12px', color: '#9b9b9b'}}>pdf、jpg</p>
+            <li
+              style={{
+                width: 60,
+                height: 50,
+                verticalAlign: 'top',
+                textAlign: 'center',
+                display: 'inline-block',
+                border: '1px solid transparent',
+                paddingTop: '12px'
+              }}
+            >
+              <p style={{ fontSize: '12px', color: '#9b9b9b' }}>支持格式</p>
+              <p style={{ fontSize: '12px', color: '#9b9b9b' }}>pdf、jpg</p>
             </li>
           </ul>
         </FormItem>
       )
-    } else if (type ==='checkbox') {
+    } else if (type === 'checkbox') {
       return (
-        <FormItem className='formItems'
+        <FormItem
+          className='formItems'
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
-            <Checkbox onChange={field.input.onChange} value={field.input.value ? field.input.value : null}>
-              {checkTxt}
-            </Checkbox>
+          help={this.showErrMessage(field)}
+        >
+          <Checkbox onChange={field.input.onChange} value={field.input.value ? field.input.value : null}>
+            {checkTxt}
+          </Checkbox>
         </FormItem>
       )
     } else {
@@ -436,7 +469,8 @@ class InputField extends React.Component {
           {...formItemLayout}
           label={label}
           validateStatus={this.validateStatus(field)}
-          help={this.showErrMessage(field)}>
+          help={this.showErrMessage(field)}
+        >
           <Input
             {...field.input}
             value={field.input.value ? field.input.value : defaultValue}
@@ -463,20 +497,23 @@ class InputField extends React.Component {
             style={inputStyle}
             onPressEnter={onPressEnter}
             size={size}
-            {...plusData} />
+            {...plusData}
+          />
         </FormItem>
       )
     }
   }
 
   render () {
-    const {label, name, type, validate} = this.props
-    const {needReload} = this.state
+    const { label, name, type, validate } = this.props
+    const { needReload } = this.state
     if (needReload) {
       return (
-        <Field name={name} label={label} type={type} component={(field) => {
-          return this.renderField(field)
-        }} validate={validate} />
+        <Field
+          name={name} label={label} type={type} component={(field) => {
+            return this.renderField(field)
+          }} validate={validate}
+        />
       )
     } else {
       return (

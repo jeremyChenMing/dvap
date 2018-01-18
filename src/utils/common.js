@@ -2,6 +2,7 @@
  * Created by nap on 17/9/4.
  */
 import _ from 'underscore'
+
 const storage = window.localStorage
 
 export const open = (url) => {
@@ -45,10 +46,10 @@ const getValue = (key) => {
 export const Storage = {
 
   setItem (key, value) {
-    let v = getValue(key)
+    const v = getValue(key)
 
     if (_.isObject(value) || _.isArray(value)) {
-      storage.setItem(key, JSON.stringify({...v, ...value}))
+      storage.setItem(key, JSON.stringify({ ...v, ...value }))
     } else {
       storage.setItem(key, value)
     }
@@ -65,4 +66,4 @@ export const Storage = {
   }
 }
 
-export const deepClone = (obj) => JSON.parse(JSON.stringify(obj))
+export const deepClone = obj => JSON.parse(JSON.stringify(obj))

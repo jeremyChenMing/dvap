@@ -1,127 +1,127 @@
-import React from 'react';
-import { connect } from 'dva';
-import { Button, Input, Select, Row, Col, Table, TreeSelect, notification } from 'antd';
-import { Field, reduxForm } from 'redux-form';
-import cx from 'classnames';
-import { routerRedux } from 'dva/router';
-import l from './Name.less';
-import MainLayout from '../components/MainLayout/MainLayout';
-import fetch from 'dva/fetch';
+import React from 'react'
+import { connect } from 'dva'
+import { Button, Row, Col, Table, TreeSelect, notification } from 'antd'
+import { reduxForm } from 'redux-form'
+// import cx from 'classnames'
+import { routerRedux } from 'dva/router'
+import l from './Name.less'
+import MainLayout from '../components/MainLayout/MainLayout'
+// import fetch from 'dva/fetch'
 import InputField from './InputField'
-const TreeNode = TreeSelect.TreeNode;
+
+const TreeNode = TreeSelect.TreeNode
 const lists = {
-    "item": [
+  item: [
+    {
+      uuid: '931739710bb84f26b3564a3ca0d3b95d',
+      name: '想多',
+      mobile: '13800000001',
+      sale_amount_finish_percent_total: '2.00',
+      area_list: [
         {
-            "uuid": "931739710bb84f26b3564a3ca0d3b95d",
-            "name": "想多",
-            "mobile": "13800000001",
-            "sale_amount_finish_percent_total": "2.00",
-            "area_list": [
-                {
-                    "detail_area_uuid": "991e4c75d612451784b4703aa6106ef9",
-                    "name": "足丰",
-                    "sale_amount_budget": "33.00",
-                    "no_tax_sale_price_budget": "54.00",
-                    "sale_budget_proportion": "12.0000",
-                    "sale_amount_actual": "10.00",
-                    "no_tax_sale_price_actual": "32.00",
-                    "sale_amount_finish_percent": "22.00"
-                }
-            ]
-        }, {
-            "uuid": "931739710bb84f26b3564a3ca0d3b95d",
-            "name": "中山",
-            "mobile": "13800000001",
-            "sale_amount_finish_percent_total": "2.00",
-            "area_list": [
-                {
-                    "detail_area_uuid": "991e4c75d612451784b4703aa6106ef9",
-                    "name": "足丰",
-                    "sale_amount_budget": "33.00",
-                    "no_tax_sale_price_budget": "54.00",
-                    "sale_budget_proportion": "12.0000",
-                    "sale_amount_actual": "10.00",
-                    "no_tax_sale_price_actual": "32.00",
-                    "sale_amount_finish_percent": "22.00"
-                }, {
-                    "detail_area_uuid": "991e4c75d612451784b4703aa6106ef9",
-                    "name": "足丰1",
-                    "sale_amount_budget": "33.00",
-                    "no_tax_sale_price_budget": "54.00",
-                    "sale_budget_proportion": "12.0000",
-                    "sale_amount_actual": "10.00",
-                    "no_tax_sale_price_actual": "32.00",
-                    "sale_amount_finish_percent": "22.00"
-                }, {
-                    "detail_area_uuid": "991e4c75d612451784b4703aa6106ef9",
-                    "name": "足丰2",
-                    "sale_amount_budget": "33.00",
-                    "no_tax_sale_price_budget": "54.00",
-                    "sale_budget_proportion": "12.0000",
-                    "sale_amount_actual": "10.00",
-                    "no_tax_sale_price_actual": "32.00",
-                    "sale_amount_finish_percent": "22.00"
-                }
-            ]
-        }, {
-            "uuid": "3a9f8f5912ab493bb26915e63308c6db",
-            "name": "陈坤",
-            "mobile": "13800000002",
-            "sale_amount_finish_percent_total": "23.00",
-            "area_list": [
-                {
-                    "detail_area_uuid": "991e4c75d612451784b4703aa6106ef9",
-                    "name": "足丰熟料",
-                    "sale_amount_budget": "12.00",
-                    "no_tax_sale_price_budget": "11.00",
-                    "sale_budget_proportion": "10.0000",
-                    "sale_amount_actual": "90.00",
-                    "no_tax_sale_price_actual": "10.00",
-                    "sale_amount_finish_percent": "0.00"
-                },
-                {
-                    "detail_area_uuid": "b666f3adace540be8e36d207b9fbd4ff",
-                    "name": "龙团",
-                    "sale_amount_budget": "10.00",
-                    "no_tax_sale_price_budget": "90.00",
-                    "sale_budget_proportion": "34.0000",
-                    "sale_amount_actual": "11.00",
-                    "no_tax_sale_price_actual": "8.00",
-                    "sale_amount_finish_percent": "3.00"
-                }
-            ]
-        }, {
-            "uuid": "931739710bb84f26b3564a3ca0d3b95d",
-            "name": "夏雨",
-            "mobile": "13800000001",
-            "sale_amount_finish_percent_total": "2.00",
-            "area_list": [
-                {
-                    "detail_area_uuid": "991e4c75d612451784b4703aa6106ef9",
-                    "name": "足丰熟料",
-                    "sale_amount_budget": "33.00",
-                    "no_tax_sale_price_budget": "54.00",
-                    "sale_budget_proportion": "12.0000",
-                    "sale_amount_actual": "10.00",
-                    "no_tax_sale_price_actual": "32.00",
-                    "sale_amount_finish_percent": "22.00"
-                }
-            ]
+          detail_area_uuid: '991e4c75d612451784b4703aa6106ef9',
+          name: '足丰',
+          sale_amount_budget: '33.00',
+          no_tax_sale_price_budget: '54.00',
+          sale_budget_proportion: '12.0000',
+          sale_amount_actual: '10.00',
+          no_tax_sale_price_actual: '32.00',
+          sale_amount_finish_percent: '22.00'
         }
-    ]
+      ]
+    }, {
+      uuid: '931739710bb84f26b3564a3ca0d3b95d',
+      name: '中山',
+      mobile: '13800000001',
+      sale_amount_finish_percent_total: '2.00',
+      area_list: [
+        {
+          detail_area_uuid: '991e4c75d612451784b4703aa6106ef9',
+          name: '足丰',
+          sale_amount_budget: '33.00',
+          no_tax_sale_price_budget: '54.00',
+          sale_budget_proportion: '12.0000',
+          sale_amount_actual: '10.00',
+          no_tax_sale_price_actual: '32.00',
+          sale_amount_finish_percent: '22.00'
+        }, {
+          detail_area_uuid: '991e4c75d612451784b4703aa6106ef9',
+          name: '足丰1',
+          sale_amount_budget: '33.00',
+          no_tax_sale_price_budget: '54.00',
+          sale_budget_proportion: '12.0000',
+          sale_amount_actual: '10.00',
+          no_tax_sale_price_actual: '32.00',
+          sale_amount_finish_percent: '22.00'
+        }, {
+          detail_area_uuid: '991e4c75d612451784b4703aa6106ef9',
+          name: '足丰2',
+          sale_amount_budget: '33.00',
+          no_tax_sale_price_budget: '54.00',
+          sale_budget_proportion: '12.0000',
+          sale_amount_actual: '10.00',
+          no_tax_sale_price_actual: '32.00',
+          sale_amount_finish_percent: '22.00'
+        }
+      ]
+    }, {
+      uuid: '3a9f8f5912ab493bb26915e63308c6db',
+      name: '陈坤',
+      mobile: '13800000002',
+      sale_amount_finish_percent_total: '23.00',
+      area_list: [
+        {
+          detail_area_uuid: '991e4c75d612451784b4703aa6106ef9',
+          name: '足丰熟料',
+          sale_amount_budget: '12.00',
+          no_tax_sale_price_budget: '11.00',
+          sale_budget_proportion: '10.0000',
+          sale_amount_actual: '90.00',
+          no_tax_sale_price_actual: '10.00',
+          sale_amount_finish_percent: '0.00'
+        },
+        {
+          detail_area_uuid: 'b666f3adace540be8e36d207b9fbd4ff',
+          name: '龙团',
+          sale_amount_budget: '10.00',
+          no_tax_sale_price_budget: '90.00',
+          sale_budget_proportion: '34.0000',
+          sale_amount_actual: '11.00',
+          no_tax_sale_price_actual: '8.00',
+          sale_amount_finish_percent: '3.00'
+        }
+      ]
+    }, {
+      uuid: '931739710bb84f26b3564a3ca0d3b95d',
+      name: '夏雨',
+      mobile: '13800000001',
+      sale_amount_finish_percent_total: '2.00',
+      area_list: [
+        {
+          detail_area_uuid: '991e4c75d612451784b4703aa6106ef9',
+          name: '足丰熟料',
+          sale_amount_budget: '33.00',
+          no_tax_sale_price_budget: '54.00',
+          sale_budget_proportion: '12.0000',
+          sale_amount_actual: '10.00',
+          no_tax_sale_price_actual: '32.00',
+          sale_amount_finish_percent: '22.00'
+        }
+      ]
+    }
+  ]
 }
 class Name extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       value: '66',
       orgValue: [],
       list: []
-    };
+    }
   }
 
-  componentDidMount() {
-    
+  componentDidMount () {
     // console.log('123123', lists)
     // fetch('/dogs', {
       // method: 'POST',
@@ -136,11 +136,10 @@ class Name extends React.Component {
     // }).catch(err => {
     //   console.log('---', err)
     // })
-    let arr = []
-    lists.item.map( (item, index) => {
-
-      item.area_list.map( (k, j) => {
-        let temp = {}
+    const arr = []
+    lists.item.map((item, index) => {
+      item.area_list.map((k, j) => {
+        const temp = {}
         temp.num = j
         temp.uuid = item.uuid
         temp.name = item.name
@@ -169,19 +168,16 @@ class Name extends React.Component {
     console.log('previous', this.state)
   };
   handle = (values) => {
-    console.log(values);
+    console.log(values)
   };
   link = () => {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     // dispatch(routerRedux.push('/users'))
     dispatch(routerRedux.push({
       pathname: '/users',
-      search: '?page=2',
-    }));
+      search: '?page=2'
+    }))
   };
-
-
-
 
   chagneOrg = (value) => {
     console.log(value)
@@ -191,22 +187,22 @@ class Name extends React.Component {
   };
 
   getIndex = (str, arr) => {
-    let num = [];
+    const num = []
     arr.map((k, j) => {
       if (k.organization_ID === str) {
         num.push(j)
       }
     })
-    return num;
+    return num
   };
   del = (arr, emp) => {
-    arr.map(m => {
+    arr.map((m) => {
       emp.splice(m, 1, 0)
     })
     return emp
   };
   filter = (need) => {
-    let ex = [];
+    const ex = []
     need.map((item, index) => {
       if (item) {
         ex.push(item)
@@ -215,36 +211,35 @@ class Name extends React.Component {
     return ex
   };
   filterEmp = (org = [], emp) => {
-    let cloneEmp = JSON.parse(JSON.stringify(emp));
+    let cloneEmp = JSON.parse(JSON.stringify(emp))
     org.map((item, index) => {
-      let orIndex = this.getIndex(item, cloneEmp)
+      const orIndex = this.getIndex(item, cloneEmp)
       cloneEmp = this.del(orIndex, cloneEmp)
     })
     return this.filter(cloneEmp)
   };
 
   getColumns = () => {
-  
     const renderContent = (value, row, index) => {
-      let obj = {
+      const obj = {
         children: value,
-        props: {},
-      };
-      console.log('-----',index)
+        props: {}
+      }
+      console.log('-----', index)
       if (row.area_list.length > 1 && row.num === 0) {
         // 需要合并
         obj.props.rowSpan = row.area_list.length
-      }else if (row.num > 0) {
+      } else if (row.num > 0) {
         obj.props.rowSpan = 0
       }
-      console.log('@',obj)
+      console.log('@', obj)
       return obj
-    };
-    let col = [];
+    }
+    let col = []
     col = [{
       title: '姓名',
       dataIndex: 'name',
-      render: renderContent,
+      render: renderContent
       // render: (value, row, index) => {
       //   const obj = {
       //     children: value,
@@ -265,22 +260,22 @@ class Name extends React.Component {
       render: renderContent
     }, {
       title: '负责区域',
-      dataIndex: 'area_name',
+      dataIndex: 'area_name'
     }, {
       title: '销量【预算】',
-      dataIndex: 'sale_amount_budget',
+      dataIndex: 'sale_amount_budget'
     }, {
       title: '无税单价【预算】',
-      dataIndex: 'no_tax_sale_price_budget',
+      dataIndex: 'no_tax_sale_price_budget'
     }, {
       title: '销售收入【预算】',
-      dataIndex: 'sale_budget_proportion',
+      dataIndex: 'sale_budget_proportion'
     }, {
       title: '销量【实际值】',
-      dataIndex: 'sale_amount_actual',
+      dataIndex: 'sale_amount_actual'
     }, {
       title: '无税单价【实际值】',
-      dataIndex: 'no_tax_sale_price_actual',
+      dataIndex: 'no_tax_sale_price_actual'
     }, {
       title: '销售完成率',
       dataIndex: 'sale_amount_finish_percent_total',
@@ -289,15 +284,15 @@ class Name extends React.Component {
       title: '操作',
       dataIndex: 'action',
       render: (text, row, index) => {
-        return(
+        return (
           <span>
             <a >修改</a>
-            <span className="ant-divider" />
+            <span className='ant-divider' />
             <a >删除</a>
           </span>
         )
       }
-    }];
+    }]
     return col
   };
 
@@ -306,51 +301,46 @@ class Name extends React.Component {
       message: 'Notification Title',
       description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
       duration: 1000000
-    });
+    })
   }
-  render() {
-
-    const { value, list } = this.state;
-    const { handleSubmit } = this.props;
-    const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
-      <div>
-        <label>{label}</label>
-        <div>
-          <Input {...input} placeholder={label} type={type} />
-          {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-        </div>
-      </div>
-    );
+  render () {
+    const { value, list } = this.state
+    // const { handleSubmit } = this.props
+    // const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+    //   <div>
+    //     <label>{label}</label>
+    //     <div>
+    //       <Input {...input} placeholder={label} type={type} />
+    //       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+    //     </div>
+    //   </div>
+    // )
     // console.log(this.filterEmp(this.state.orgValue,employee))
     const optionsA = [{ name: '是', key: 'yes' }, { name: '否', key: 'no' }]
     const optionsB = [{ name: '启用', key: 'ok' }, { name: '停止', key: 'not' }]
-  
+
     console.log(list)
     return (
       <MainLayout location={this.props.location}>
         <div className={l.normal} >
           Route Component: Name
-          <span className={l.dot,l.font}>{value}</span>
-          <Button onClick={this.handleclick.bind(null,'55')}>click-55</Button>
-          <Button onClick={this.handleclick.bind(null,'88')}>click-88</Button>
-          <Button onClick={this.handleclick.bind(null,'zz')}>click-zz</Button>
-          <Button onClick={this.handleclick.bind(null,'66')}>click-66</Button>
+          <span>{value}</span>
+          <Button onClick={this.handleclick.bind(null, '55')}>click-55</Button>
+          <Button onClick={this.handleclick.bind(null, '88')}>click-88</Button>
+          <Button onClick={this.handleclick.bind(null, 'zz')}>click-zz</Button>
+          <Button onClick={this.handleclick.bind(null, '66')}>click-66</Button>
         </div>
 
         <Button onClick={this.click}>ok</Button>
         <Row>
           <Col span={12}>
-            <InputField name="yan" type="radio"  options={optionsA} placeholder="请输入" size="small" label="到期延续" validate={[]} />
+            <InputField name='yan' type='radio' options={optionsA} placeholder='请输入' size='small' label='到期延续' validate={[]} />
           </Col>
           <Col span={12}>
-            <InputField name="status" type="radio"  options={optionsB} placeholder="请输入" size="small" label="状态" validate={[]} />
+            <InputField name='status' type='radio' options={optionsB} placeholder='请输入' size='small' label='状态' validate={[]} />
           </Col>
         </Row>
-        <Button type="primary" onClick={this.link} ghost>跳转页面</Button>
-
-
-
-
+        <Button type='primary' onClick={this.link} ghost>跳转页面</Button>
 
         <TreeSelect
           style={{ width: 300 }}
@@ -361,33 +351,30 @@ class Name extends React.Component {
           // treeDefaultExpandAll
           // onChange={this.onChange}
         >
-          <TreeNode value="parent 1" title="parent 1" key="0-1">
-            <TreeNode value="parent 1-0" title="parent 1-0" key="0-1-1">
-              <TreeNode value="leaf1" title="my leaf" key="random" />
-              <TreeNode value="leaf2" title="your leaf" key="random1" />
+          <TreeNode value='parent 1' title='parent 1' key='0-1'>
+            <TreeNode value='parent 1-0' title='parent 1-0' key='0-1-1'>
+              <TreeNode value='leaf1' title='my leaf' key='random' />
+              <TreeNode value='leaf2' title='your leaf' key='random1' />
             </TreeNode>
-            <TreeNode value="parent 1-1" title="parent 1-1" key="random2">
-              <TreeNode value="sss" title={<b style={{ color: '#08c' }}>sss</b>} key="random3" />
+            <TreeNode value='parent 1-1' title='parent 1-1' key='random2'>
+              <TreeNode value='sss' title={<b style={{ color: '#08c' }}>sss</b>} key='random3' />
             </TreeNode>
           </TreeNode>
         </TreeSelect>
         <Table columns={this.getColumns()} dataSource={list} bordered />
-        
+
       </MainLayout>
-    );
+    )
+  }
+}
+Name = reduxForm({ //eslint-disable-line
+  form: 'name'
+})(Name)
+const mapStateToProps = (state) => {
+  const { loading } = state
+  return {
+    loading
   }
 }
 
-
-Name = reduxForm({
-  form: 'name',
-})(Name);
-
-const mapStateToProps = (state) => {
-  const { loading } = state;
-  return {
-    loading,
-  };
-};
-
-export default connect(mapStateToProps)(Name);
+export default connect(mapStateToProps)(Name)

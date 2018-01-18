@@ -12,6 +12,7 @@ module.exports = {
     "production": {
       "extraBabelPlugins": [
         "transform-runtime",
+        "transform-remove-console",
         ["import", {"libraryName": "antd", "style": true}]
       ]
     }
@@ -24,6 +25,7 @@ module.exports = {
       "pathRewrite": { "^/api" : "" }
     }
   },
+  "hash": true,
   "theme": {
       "@primary-color": "#F4682A",
       "@font-size-base": "14px",
