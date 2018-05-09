@@ -1,0 +1,10 @@
+.overs{
+width: 100px;
+height: 100px;
+background-color: red;
+animation:mymove 5s infinite;
+}
+@keyframes mymove {
+from { transform: translateX(0px) }
+to { transform: translateX(200px) }
+}

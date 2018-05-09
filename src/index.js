@@ -2,16 +2,17 @@ import dva from 'dva'
 import createLoading from 'dva-loading'
 import { message } from 'antd'
 import { reducer as formReducer } from 'redux-form'
-// import createHistory from 'history/createBrowserHistory'
-import 'antd/dist/antd.less'
+// import createHistory from 'history/createHashHistory'
+import createHistory from 'history/createBrowserHistory'
+// import 'antd/dist/antd.less'
 import './less/index.less'
+import './index.css'
 
-// const historys = createHistory();
-// console.log(historys, obj);
+const historys = createHistory()
 
 // 1. Initialize
 const app = dva({
-  // history: historys,
+  history: historys,
   extraReducers: {
     form: formReducer
   },

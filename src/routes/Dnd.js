@@ -8,9 +8,8 @@ class Content extends PureComponent {
   render () {
     console.log('render content!')
     return <div>Content{this.props.a}</div>
-  } 
+  }
 }
-
 
 class Dnd extends React.Component {
   state = {
@@ -27,6 +26,8 @@ class Dnd extends React.Component {
     const { a } = this.state
     console.log('render App!')
     // 测试分支的推送情况
+
+
     return (
       <MainLayout location={location}>
         <div className='myself'>
