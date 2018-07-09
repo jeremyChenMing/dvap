@@ -1,15 +1,19 @@
 .normal {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  /*height: 100%;*/
+  /*width: 100%;*/
 }
 
 .content {
   flex: 1;
-  display: flex;
+  /*display: flex;*/
 }
 
 .main {
   padding: 0 8px;
-  flex: 1 0 auto;
+  /*flex: 1 0 auto;*/
+}
+.ant-spin-nested-loading > div > .ant-spin{
+  left: 0;
 }

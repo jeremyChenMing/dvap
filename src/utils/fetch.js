@@ -30,10 +30,8 @@ const checkStatus = (response) => {
 }
 
 const parseJSON = (response) => {
+  console.log(response, '**')
   return response.json().then((json) => {
-    // if (json.code === 401) {
-    //   window.location.href = '/#/login'
-    // }
     return json
   }).catch((err) => {
     console.log(err)

@@ -25,13 +25,13 @@ class Tys extends React.Component {
 function RouterConfig ({ history, app }) {
   const IndexPage = dynamic({
     app,
-    models: () => [import('./models/example')],
+    // models: () => [import('./models/example')],
     component: () => import('./routes/IndexPage')
   })
 
   const Users = dynamic({
     app,
-    models: () => [import('./models/user')],
+    // models: () => [import('./models/user')],
     component: () => import('./routes/Users')
   })
 

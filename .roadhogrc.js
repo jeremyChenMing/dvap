@@ -19,11 +19,11 @@ module.exports = {
   },
   "publicPath": "/",
   "proxy": {
-    "/api": {
-      "target": "http://jsonplaceholder.typicode.com/",
-      "changeOrigin": true,
-      "pathRewrite": { "^/api" : "" }
-    }
+    // "/api": {
+      // "target": "http://localhost:3000/",
+      // "changeOrigin": true,
+      // "pathRewrite": { "^/api" : "" }
+    // }
   },
   "hash": true,
   "theme": {

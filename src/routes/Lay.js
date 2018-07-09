@@ -113,7 +113,7 @@ class Lay extends React.Component {
       console.log(props)
       return (
         <div>
-          <Route path={`${props.match.path}/list`} render={() => <span>123123</span>} />
+          <Route path={`${props.computedMatch.path}/list`} render={() => <span>123123</span>} />
         </div>
       )
     }

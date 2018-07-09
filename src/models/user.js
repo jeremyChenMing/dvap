@@ -1,9 +1,10 @@
 import querystring from 'querystring'
 // import pathToRegexp from 'path-to-regexp';
 import * as usersService from '../services/users'
-import key from 'keymaster'
+// import key from 'keymaster'
+
 export default {
-  namespace: 'users',
+  namespace: 'user',
   state: {
     list: [],
     total: 0,
@@ -41,19 +42,19 @@ export default {
     // put用来发action
   },
   subscriptions: {
-    // setup ({ dispatch, history }, done) {
-    //   // done({message:'44'}) 用来抛出错误的
-    //   return history.listen((a) => {
-    //     const query = querystring.parse(a.search.substringsubstring(1))
-    //     // const match = pathToRegexp('/users/:id').exec(a.pathname);
-    //     // if (match) {
-    //     //   const userId = match[1];
-    //     // }
-    //     if (a.pathname.indexOf('/users') !== -1) {
-    //       dispatch({ type: 'fetch', payload: query })
-    //     }
-    //   })
-    // },
+    setup ({ dispatch, history }, done) {
+      // done({message:'44'}) 用来抛出错误的
+      return history.listen((a) => {
+        // const query = querystring.parse(a.search.substringsubstring(1))
+        // const match = pathToRegexp('/users/:id').exec(a.pathname);
+        // if (match) {
+        //   const userId = match[1];
+        // }
+        if (a.pathname.indexOf('/users') !== -1) {
+          // dispatch({ type: 'fetch', payload: query })
+        }
+      })
+    },
     // keyEvent({dispatch}) {
     //   console.log('8888888')
     //   key('⌘+b, ctrl+b', () => { console.log('123123123') });

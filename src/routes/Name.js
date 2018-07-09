@@ -2,13 +2,13 @@ import React from 'react'
 import { connect } from 'dva'
 import { Button, Row, Col, Table, TreeSelect, notification } from 'antd'
 import { reduxForm } from 'redux-form'
-// import cx from 'classnames'
+import cx from 'classnames'
 import { routerRedux } from 'dva/router'
 import l from './Name.less'
 import MainLayout from '../components/MainLayout/MainLayout'
 // import fetch from 'dva/fetch'
 import InputField from './InputField'
-
+import ScrollReveal from 'scrollreveal'
 const TreeNode = TreeSelect.TreeNode
 const lists = {
   item: [
@@ -111,6 +111,61 @@ const lists = {
     }
   ]
 }
+
+
+class ImagesTurn extends React.Component {
+  static propTypes = {
+    name: React.PropTypes.string,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      // pos: [{"left":77,"top":20},{"left":336,"top":55},{"left":595,"top":20}]
+      pos: ['pic1', 'pic2', 'pic3']
+    }
+  }
+  next = () => {
+    const shifts = this.state.pos.shift()
+    this.state.pos.push(shifts);
+    this.setState({})
+  }
+  prev = () => {
+    const shifts = this.state.pos.pop()
+    this.state.pos.unshift(shifts);
+    this.setState({})
+  }
+  link = (item, index) => {
+    console.log(index, item)
+    if (item === 'pic1') {
+      this.next()
+    }else if (item === 'pic3') {
+      this.prev()
+    }
+  }
+  render() {
+    return (
+      <div className={cx(l.imgageBox)}>
+        <Button onClick={this.prev}>上一步</Button>
+        <Button onClick={this.next}>下一步</Button>
+        <ul className={cx(l.znsRotatePic)}>
+          {
+            this.state.pos.map( (item,index) => {
+              return(
+                <li key={index} className={cx(l[item])} onClick={this.link.bind(null, item, index)}>
+                  <a href="javascript:;" className={cx(l.con)}>{index + 1}</a>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </div>
+    );
+  }
+}
+
+
+
 class Name extends React.Component {
   constructor (props) {
     super(props)
@@ -122,6 +177,9 @@ class Name extends React.Component {
   }
 
   componentDidMount () {
+
+    document.oncontextmenu=new Function("event.returnValue=false"); 
+    document.onselectstart=new Function("event.returnValue=false"); 
     // console.log('123123', lists)
     // fetch('/dogs', {
       // method: 'POST',
@@ -159,6 +217,32 @@ class Name extends React.Component {
     this.setState({
       list: arr
     })
+
+    // window.sr = ScrollReveal({ duration: 1200 });
+    
+    
+
+    
+
+    window.sr = ScrollReveal({ duration: 1200, reset: true });
+    sr.reveal('.bar', { 
+      duration: 1200,
+      origin: 'left',
+      distance: '200px', 
+      scale: 1,
+    });
+    sr.reveal('.cell', { 
+      duration: 1000,
+      scale: 1,
+      origin: 'left',
+      distance: '10px' 
+    }, 300);
+    sr.reveal('.fooReveal', { 
+      container: '.fooContainer', 
+      duration: 2000,
+
+      rotate: {z: 25} 
+    });
   }
 
   handleclick = (value, e) => {
@@ -225,14 +309,12 @@ class Name extends React.Component {
         children: value,
         props: {}
       }
-      console.log('-----', index)
       if (row.area_list.length > 1 && row.num === 0) {
         // 需要合并
         obj.props.rowSpan = row.area_list.length
       } else if (row.num > 0) {
         obj.props.rowSpan = 0
       }
-      console.log('@', obj)
       return obj
     }
     let col = []
@@ -318,10 +400,9 @@ class Name extends React.Component {
     // console.log(this.filterEmp(this.state.orgValue,employee))
     const optionsA = [{ name: '是', key: 'yes' }, { name: '否', key: 'no' }]
     const optionsB = [{ name: '启用', key: 'ok' }, { name: '停止', key: 'not' }]
-
-    console.log(list)
     return (
       <MainLayout location={this.props.location}>
+        <ImagesTurn />
         <div className={l.normal} >
           Route Component: Name
           <span>{value}</span>
@@ -330,7 +411,11 @@ class Name extends React.Component {
           <Button onClick={this.handleclick.bind(null, 'zz')}>click-zz</Button>
           <Button onClick={this.handleclick.bind(null, '66')}>click-66</Button>
         </div>
-
+        <div className="fooContainer">
+          <div className="fooReveal"> Foo </div>
+          <div className="fooReveal"> Foo </div>
+          <div className="fooReveal"> Foo </div>
+        </div>
         <Button onClick={this.click}>ok</Button>
         <Row>
           <Col span={12}>
@@ -342,27 +427,16 @@ class Name extends React.Component {
         </Row>
         <Button type='primary' onClick={this.link} ghost>跳转页面</Button>
 
-        <TreeSelect
-          style={{ width: 300 }}
-          // value={this.state.value}
-          // dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-          // placeholder="Please select"
-          // allowClear
-          // treeDefaultExpandAll
-          // onChange={this.onChange}
-        >
-          <TreeNode value='parent 1' title='parent 1' key='0-1'>
-            <TreeNode value='parent 1-0' title='parent 1-0' key='0-1-1'>
-              <TreeNode value='leaf1' title='my leaf' key='random' />
-              <TreeNode value='leaf2' title='your leaf' key='random1' />
-            </TreeNode>
-            <TreeNode value='parent 1-1' title='parent 1-1' key='random2'>
-              <TreeNode value='sss' title={<b style={{ color: '#08c' }}>sss</b>} key='random3' />
-            </TreeNode>
-          </TreeNode>
-        </TreeSelect>
         <Table columns={this.getColumns()} dataSource={list} bordered />
-
+        <div className="box">box</div>
+        <div className="bar">bar</div>
+        <ul className="list">
+          {
+            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map( (item,index) => {
+              return <li key={index} className="cell">{item}</li>
+            })
+          }
+        </ul>
       </MainLayout>
     )
   }
