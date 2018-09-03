@@ -53,3 +53,96 @@
       }
   }
 }
+
+
+
+
+
+.avartBox{
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  margin: 20px auto;
+  position: relative;
+  .imgs{
+    background-color: #cfc;
+    height: 100%;
+    & > img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .editIcon{
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    cursor: pointer;
+    font-size: 40px;
+    z-index: -1;
+  }
+  form{
+      position: absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      right: 0;
+      cursor: pointer;
+      input{
+          height:100%;
+          width:100%;
+          display: block;
+          opacity: 0;
+          cursor: pointer;
+      }
+      .reset{
+          display: none;
+      }
+  }
+}
+
+
+.modalBox{
+  display: table;
+  padding: 20px;
+  & > div{
+    display: table-cell;
+    vertical-align: top;
+  }
+  .imgBox{
+    width: ~'calc(100% - 200px)';
+    padding-left: 20px;
+    img{
+      max-width: 100%;
+    }
+  }
+  .priewImg{
+    width: 200px;
+    & > div{
+      height: 200px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+    }
+    
+  }
+}
+
+:global{
+  .reload{
+    .anticon{
+      transform: scale(-1, 1);
+    }
+  }
+  .swap{
+    .anticon{
+      transform: rotate(90deg);
+    }
+  }
+};
+
+
+
+
+
+
+

@@ -160,12 +160,34 @@ class Dnd extends React.Component {
       star: !star
     })
   }
+  onExited = () => {
+    console.log('123123123')
+    this.setState({
+      star: true
+    })
+  }
   render () {
     const { location } = this.props
     const { ins, test, current, currentDom, star, items } = this.state;
-    console.log(star, 'star')
+    // console.log(star, 'star', ins)
     return (
       <MainLayout location={location}>
+        <div>
+          <Button onClick={this.handleStar.bind(null, star)}>start</Button>
+        </div>
+        <div className={l.starBox}>
+          <CSSTransition
+            in={star}
+            timeout={300}
+            classNames="star"
+            onExited={this.onExited}
+            // unmountOnExit
+          >
+            <div className="star">⭐</div>
+          </CSSTransition>
+          <div className={l.star}>⭐</div>
+        </div>
+        
         <div className="box">
           <Icon type="link" /> 
           <i>123<Icon type="up-circle-o" /></i>
@@ -187,17 +209,7 @@ class Dnd extends React.Component {
         </Fade>
 
 
-        <div>
-          <Button onClick={this.handleStar.bind(null, star)}>start</Button>
-        </div>
-        <CSSTransition
-          in={star}
-          timeout={300}
-          classNames="star"
-          // unmountOnExit
-        >
-          <div className="star">⭐</div>
-        </CSSTransition>
+        
 
         <List />
 

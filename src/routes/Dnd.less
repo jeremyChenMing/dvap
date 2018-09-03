@@ -35,6 +35,17 @@
   text-align: center;
   line-height: 200px;
 }
+
+
+.starBox{
+  position: relative;
+  .star{
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 0.5rem;
+  }
+}
 :global{
   .box{
     height: 100px;
@@ -44,15 +55,15 @@
   .star {
     display: inline-block;
     margin-left: 0.5rem;
-    transform: scale(1.25);
+    transform: scale(1);
   }
   .star-enter {
-    opacity: 0.01;
-    transform: translateY(-100%) scale(0.75);
+    opacity: 1;
+    transform: translateY(0%) scale(1);
   }
   .star-enter-active {
     opacity: 1;
-    transform: translateY(0%) scale(1.25);
+    transform: translateY(0%) scale(1);
     transition: all 300ms ease-out;
   }
   .star-exit {

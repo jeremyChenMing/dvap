@@ -22,3 +22,19 @@ export const delMessage = (uuid) => {
 export const uploaderFile = (data) => {
   return fetch.postFormData(`/api/upload`, {}, data)
 }
+
+
+
+
+export const getLocals = () => {
+  return fetch.get('/blog/example', {})
+}
+export const delLocals = (id) => {
+  return fetch.del('/blog/delexam/'+ id, {})
+}
+export const postLocals = (data) => {
+  return fetch.post('/blog/postexam', {}, data)
+}
+export const putLocals = (id, data) => {
+  return fetch.post('/blog/putexam/' + id, {}, data)
+}

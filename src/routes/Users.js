@@ -1,12 +1,15 @@
 import React from 'react'
 import { connect } from 'dva'
 import l from './Users.less'
+import cx from 'classnames';
 import UsersComponent from '../components/Users'
 import MainLayout from '../components/MainLayout/MainLayout'
+// import Cropper from 'cropperjs'
+// import 'cropperjs/dist/cropper.css'
 
-
-import { Form, Input, Icon, Button, notification, Spin, essage } from 'antd';
+import { Form, Input, Icon, Button, notification, Spin, essage, Modal, Row, Col, Tooltip } from 'antd';
 const FormItem = Form.Item;
+const ButtonGroup = Button.Group;
 
 let uuid = 0;
 class DynamicFieldSet extends React.Component {
@@ -329,6 +332,187 @@ class FileUpload extends React.Component {
 
 
 
+class Avarts extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      SRC: '/images/yay.jpg',
+      url: null,
+      visible: true,
+      udbool: true,
+      lrbool: true
+    }
+  }
+
+
+  handleFileChange = (e) => {
+    const that = this;
+    const file = e.target.files[0];
+    if (typeof FileReader !== undefined) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file)
+      reader.onload = function(){
+        console.log("加载成功", file)
+        
+        if (file.type.indexOf('image') !== -1) {
+          const dataRul = this.result
+          that.setState({
+            // SRC: this.result,
+            visible: true
+          }, () => {
+            that.setState({
+              SRC: dataRul
+            })
+          })
+        }else{
+          notification.info({
+            message: '文件格式不对，请重新上传！'
+          })
+        }
+       
+      }
+      reader.onloadstart = function(){
+        // that.setState({spinning: true})
+        // console.log("开始加载")
+      }
+      reader.onloadend= function(){
+        // that.setState({spinning: false})
+        // console.log("加载结束")
+      }
+      reader.onprogress = function(){
+        // count++;
+        // console.log("加载中"+count)
+      }
+    }else{
+      console.log('浏览器不支持 FileReader')
+    }
+  }
+
+
+  componentDidMount() {
+    setTimeout(this.setCropper, 1000)
+  }
+
+  setCropper = () => {
+    this.cropper = new Cropper(this.img, {
+      viewMode: 1,
+      autoCrop: true,
+      aspectRatio: 1 / 1,
+      preview: ".small",
+      autoCropArea: 0.5,
+    })
+  }
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    })
+  }
+  blobToDataURL = (blob, callback) => {
+      var a = new FileReader();
+      a.onload = function (e) { callback(e.target.result); }
+      a.readAsDataURL(blob);
+  }
+  handleOk = () => {
+    // const imgs = this.cropper.getCropBoxData();
+    const imgs = this.cropper.getCroppedCanvas();
+    console.log(imgs)
+    // this.setState({
+    //   visible: false
+    // })
+    imgs.toBlob( (blob) => {
+      this.blobToDataURL(blob, this.callback)
+    })
+  }
+  callback = (data) => {
+    this.setState({
+      visible: false,
+      url: data
+    })
+  }
+
+
+
+  handleRotate = (type) => {
+    console.log(type)
+    this.cropper.rotate(type === 'left' ? -45 : 45)
+  }
+
+  handlePosition = (bool, type) => {
+    console.log(type)
+    if (type === 'ud') {
+      this.cropper.scaleY(bool ? -1 : 1);
+      this.setState({
+        udbool: !bool
+      })
+    }else{
+      this.cropper.scaleX(bool ? -1 : 1);
+      this.setState({
+        lrbool: !bool
+      })
+    }
+  }
+  render() {
+    const { SRC, url, visible, udbool, lrbool } = this.state;
+    return (
+      <div>
+        <div className={l.avartBox}>
+          <div className={l.imgs}>
+            {url && <img src={url} alt=""/>}
+          </div>
+          <form>
+            <input type='file'  onChange={this.handleFileChange}/>
+            <input type='reset' ref={(input) => this.reset=input} className={l.reset} />
+          </form>
+         {/*<Icon type="edit" className={l.editIcon} />*/}
+        </div>
+
+
+        <Modal
+          visible={visible}
+          width={900}
+          maskClosable={false}
+          closable={false}
+          onCancel={this.handleCancel}
+          onOk={this.handleOk}
+        >
+          <div className={cx(l.modalBox)}>
+            <div className={cx(l.priewImg)}>
+              <div className={cx('small')}>
+                
+              </div>
+            </div>
+            <div className={cx(l.imgBox)}>
+              {SRC && <img src={SRC} ref={(img) => this.img = img} alt=""/>}
+              <div style={{padding: '10px 0'}}>
+                <ButtonGroup >
+                  <Tooltip title="左转45" placement="bottom"> 
+                    <Button onClick={this.handleRotate.bind(null, 'left')} type="primary" icon="reload" className={cx('reload')} />
+                  </Tooltip>
+                  <Tooltip title="右转45" placement="bottom">
+                    <Button onClick={this.handleRotate.bind(null, 'right')} type="primary" icon="reload" />
+                  </Tooltip>
+                </ButtonGroup>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+
+                <ButtonGroup >
+                  <Tooltip title="上下颠倒" placement="bottom"> 
+                    <Button onClick={this.handlePosition.bind(null, udbool, 'ud')} type="primary" icon="swap" className={cx('swap')} />
+                  </Tooltip>
+                  <Tooltip title="左右颠倒" placement="bottom">
+                    <Button onClick={this.handlePosition.bind(null, lrbool, 'lr')} type="primary" icon="swap" />
+                  </Tooltip>
+                </ButtonGroup>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </div>
+    );
+  }
+}
+
+
 class Users extends React.Component {
   constructor(props) {
     super(props);
@@ -340,6 +524,7 @@ class Users extends React.Component {
     const {location} = this.props;
     return (
       <MainLayout location={location}>
+        <Avarts />
         <div>
           <Box name="jeremy"/>
           <Noti {...this.props} />

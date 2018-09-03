@@ -12,6 +12,7 @@
   "dependencies": {
     "antd": "^2.13.6",
     "babel-runtime": "^6.9.2",
+    "cropperjs": "^1.4.1",
     "dva": "^2.0.3",
     "dva-loading": "^1.0.3",
     "es6-promise": "^4.2.2",

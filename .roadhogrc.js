@@ -19,11 +19,11 @@ module.exports = {
   },
   "publicPath": "/",
   "proxy": {
-    // "/api": {
-      // "target": "http://localhost:3000/",
-      // "changeOrigin": true,
-      // "pathRewrite": { "^/api" : "" }
-    // }
+    "/blog": {
+      "target": "http://localhost:8000/blog",
+      "changeOrigin": true,
+      "pathRewrite": { "^/blog" : "" }
+    }
   },
   "hash": true,
   "theme": {
