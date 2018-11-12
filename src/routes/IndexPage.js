@@ -10,7 +10,7 @@ import moment from 'moment'
 import { Button, InputNumber, Input, Table, Popconfirm, Upload, Icon, Modal, Form, Select } from 'antd'
 
 import {Collapse, UnmountClosed} from 'react-collapse';
-import { getMessage, postMessage, delMessage, uploaderFile, getLocals, delLocals, postLocals, putLocals  } from '../services/example'
+import { getMessage, postMessage, delMessage, uploaderFile, getLocals, delLocals, postLocals, putLocals, tt  } from '../services/example'
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -350,9 +350,31 @@ class Back extends React.Component {
     }
   }
   componentDidMount() {
-    this.locals()
+    // this.locals()
+    // setInterval(this.getCode, 5000)
+    this.getCode()
   }
+  getCode = async() => {
+    const data = [
+      'https://www.51bricks.com',
+      'https://www.51bricks.com/#/us',
+      'https://www.51bricks.com/#/main/hot',
+      'https://www.51bricks.com/#/main/view',
+      'https://www.51bricks.com/#/main/author',
+      'https://www.51bricks.com/#/person/203',
+      'https://www.51bricks.com/#/main/detail?id=24',
+    ]
 
+    try{
+      const result = await tt(data.join('\n'));
+      console.log(result)
+      if (result && !result.code) {
+        
+      }
+    }catch(err) {
+      console.log(err)
+    }
+  }
   renderAction = (text, record, index) => {
     return <span>
       <a href="javascript:;" onClick={this.edit.bind(null, record)}>编辑</a>
@@ -501,8 +523,8 @@ function IndexPage ({ location }) {
   return (
     <MainLayout location={location}>
       <div className={styles.normal}>
-        <WrappedRegistrationForm />
-        {/* <div className={styles.welcome} /> 
+        {/*<WrappedRegistrationForm />
+         <div className={styles.welcome} /> 
         <ul className={styles.list}>
           <li>To get started, edit <code>src/index.js</code> and save to reload.</li>
         </ul>
@@ -519,4 +541,40 @@ function IndexPage ({ location }) {
 }
 
 
-export default connect()(IndexPage)
+@connect(({example}) => (
+  example
+))
+
+class IndexPages extends React.Component {
+  
+  // constructor(props) {
+  //   super(props);
+  // }
+  componentDidMount() {
+    // const xml = new XMLHttpRequest()
+    // xml.open('GET','http://127.0.0.1:8000/blog/example', true)
+    // xml.onreadystatechange = function () {
+    //   if (xml.readyState === 4) {
+    //     if (xml.status === 200) {
+    //       console.log(JSON.parse(xml.responseText))
+    //     }
+    //   }
+    // }
+    // xml.send(null)
+  }
+  render() {
+    const { page } = this.props;
+    console.log(this.props)
+    return (
+      <MainLayout location={this.props.location}>
+        <div className={styles.normal}>
+          132323
+          page: {page}
+        </div>
+      </MainLayout>
+    );
+  }
+}
+
+export default IndexPages
+

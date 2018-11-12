@@ -30,7 +30,6 @@ const checkStatus = (response) => {
 }
 
 const parseJSON = (response) => {
-  console.log(response, '**')
   return response.json().then((json) => {
     return json
   }).catch((err) => {
@@ -89,6 +88,20 @@ export const post = (url, query = {}, data = {}, options = {}) => {
 
   return fetch(getUrl(url, query), defaultOpt).then(checkStatus).then(parseJSON)
 }
+
+export const postText = (url, query = {}, data = {}, options = {}) => {
+  const defaultOpt = {
+    method: 'POST',
+    timeout: requestTimeOut,
+    body: data,
+    headers: {
+      "Content-type": "text/plain; charset=utf-8"
+    }
+  }
+
+  return fetch(getUrl(url, query), defaultOpt).then(checkStatus).then(parseJSON)
+}
+
 
 export const put = (url, query = {}, data = {}, options = {}) => {
   const defaultOpt = {

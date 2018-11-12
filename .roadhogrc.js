@@ -23,8 +23,14 @@ module.exports = {
       "target": "http://localhost:8000/blog",
       "changeOrigin": true,
       "pathRewrite": { "^/blog" : "" }
+    },
+    "/urls": {
+      "target": "http://data.zz.baidu.com/urls",
+      "changeOrigin": true,
+      "pathRewrite": { "^/urls" : "" }
     }
   },
+  extraBabelPlugins: ['transform-decorators-legacy'],
   "hash": true,
   "theme": {
       "@primary-color": "#F4682A",

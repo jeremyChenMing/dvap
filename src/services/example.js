@@ -38,3 +38,9 @@ export const postLocals = (data) => {
 export const putLocals = (id, data) => {
   return fetch.post('/blog/putexam/' + id, {}, data)
 }
+
+
+
+export const tt = (data) => {
+  return fetch.postText('urls?site=https://www.51bricks.com&token=8MwcDiO6eo2SV64g',{}, data)
+}
